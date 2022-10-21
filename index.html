@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RectGen</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>RectGen</h1>
+        <h2>Rectangle generator</h2>
+      </header>
+      <div class="parameters">
+        <div class="data">
+          <div class="x">
+            <label for="horizontal">X:</label>
+            <input id="horizontal" type="number" max="10" />
+          </div>
+          <div class="y">
+            <label for="vertical">Y:</label>
+            <input id="vertical" type="number" max="10" />
+          </div>
+          <div class="theme">
+            <label for="theme">Theme:</label>
+            <input id="theme" type="text" max="10" />
+          </div>
+        </div>
+        <div class="create-btn">
+          <button id="createRectBtn">create</button>
+        </div>
+      </div>
+      <div id="outputField" class="output-field">
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
