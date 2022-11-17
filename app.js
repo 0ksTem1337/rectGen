@@ -21,11 +21,19 @@ const library = {
     name: "default",
     fill: "X",
     empty: "-",
+    colorFill: "#27ae60",
+    colorEmpty: "#ecf0f1",
+    colorFillText: '#ecf0f1',
+    colorEmptyText: '#27ae60'
   },
   binary: {
     name: "binary",
     fill: "1",
     empty: "0",
+    colorFill: "#27ae60",
+    colorEmpty: "#ecf0f1",
+    colorFillText: '#ecf0f1',
+    colorEmptyText: '#27ae60'
   },
   palette: {
     name: "palette",
@@ -33,6 +41,8 @@ const library = {
     empty: "-",
     colorFill: "#27ae60",
     colorEmpty: "#ecf0f1",
+    colorFillText: '#27ae60',
+    colorEmptyText: '#ecf0f1'
   },
 };
 
@@ -45,19 +55,29 @@ const createRect = (x, y, theme) => {
       cells[i].replaceChildren();
     }
     for (let i = 0; i < 100; i++) {
-      cells[i].style.background = library.palette.colorEmpty;
+      cells[i].style.background = library.default.colorEmpty;
     }
     cells = document.querySelectorAll("#cell");
   };
 
   rectReset();
 
-  if (theme === undefined || !theme) {
-    theme = library.default;
-  } else if (theme === "library.binary") {
+  if (theme === "binary") {
     theme = library.binary;
-  } else if (theme === "library.palette") {
+  } else if (theme === "palette") {
     theme = library.palette;
+  } else {
+    theme = library.default
+  }
+
+  if (x > 10) {
+    x = 10
+    horizontal.value = 10
+  }
+
+  if (y > 10) {
+    y = 10
+    vertical.value = 10
   }
 
   for (let i = 0; i < x; i++) {
@@ -98,12 +118,12 @@ const createRect = (x, y, theme) => {
 
   for (let i = 0; i < rect.length * 10; i++) {
     cells[i].innerHTML += rectIdx[i];
-    if (theme.name === "palette" && cells[i].outerText === theme.fill) {
-      cells[i].style.background = library.palette.colorFill;
-      cells[i].style.color = library.palette.colorFill;
-    } else if (theme.name === "palette" && cells[i].outerText === theme.empty) {
-      cells[i].style.background = library.palette.colorEmpty;
-      cells[i].style.color = library.palette.colorEmpty;
+    if (cells[i].outerText === theme.fill) {
+      cells[i].style.background = theme.colorFill;
+      cells[i].style.color = theme.colorFillText;
+    } else if (cells[i].outerText === theme.empty) {
+      cells[i].style.background = theme.colorEmpty;
+      cells[i].style.color = theme.colorEmptyText;
     }
   }
 };
