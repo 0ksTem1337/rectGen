@@ -2,15 +2,11 @@ const horizontal = document.querySelector('#horizontal')
 const vertical = document.querySelector('#vertical')
 const theme = document.querySelector('#theme')
 const createRectBtn = document.querySelector('#createRectBtn')
+const rowCells = document.querySelector('#row')
+const colCells = document.querySelector('#col')
 
 const cell = `<div id="cell" class="cell"></div>`
 const outputField = document.querySelector('#outputField')
-
-for (let i = 0; i < 100; i++) {
-	outputField.insertAdjacentHTML('beforeend', cell)
-}
-
-let cells = document.querySelectorAll('#cell')
 
 let rect = []
 let patternX = []
@@ -46,20 +42,138 @@ const library = [
 	},
 ]
 
-const createRect = (x, y, theme) => {
+const createRect = (x, y, theme, row, col) => {
+	totalCells = row * col
+
+	if (x > row) {
+		x = row
+		horizontal.value = row
+	}
+
+	if (y > col) {
+		y = col
+		vertical.value = col
+	}
+
+	if (row < 10) {
+		row = 10
+		rowCells.value = 10
+	} else if (row > 100) {
+		row = 100
+		rowCells.value = 100
+	}
+
+	if (col < 10) {
+		col = 10
+		colCells.value = 10
+	} else if (col > 100) {
+		col = 100
+		colCells.value = 100
+	}
+
+	const cellSetting = [
+		{ margin: 5, height: 40, width: 40, fontSize: 20, lineHeight: 40 },
+		{ margin: 3, height: 15, width: 15, fontSize: 7, lineHeight: 15 },
+		{ margin: 2, height: 12, width: 12, fontSize: 5, lineHeight: 12 },
+		{ margin: 1, height: 9, width: 9, fontSize: 4, lineHeight: 9 },
+	]
+
+	if (outputField.children.length > 0) {
+		outputField.innerHTML = ''
+	}
+
+	for (let i = 0; i < totalCells; i++) {
+		outputField.insertAdjacentHTML('beforeend', cell)
+	}
+
+	let cells = document.querySelectorAll('#cell')
+
 	const rectReset = () => {
 		patternX = []
 		patternY = []
 		rect = []
-		for (let i = 0; i < 100; i++) {
+		for (let i = 0; i < totalCells; i++) {
 			cells[i].replaceChildren('')
 		}
-		for (let i = 0; i < 100; i++) {
+		for (let i = 0; i < totalCells; i++) {
 			cells[i].style.background = library[0].colorEmpty
 		}
 	}
 
 	rectReset()
+
+	if (row === 10) {
+		document.querySelector('.container').style.width = `720px`
+		outputField.style.width = `720px`
+		outputField.style.gridTemplateColumns = `repeat(${row}, 1fr)`
+		for (let i = 0; i < totalCells; i++) {
+			cells[i].style.margin = `10px`
+			cells[i].style.height = `50px`
+			cells[i].style.width = `50px`
+			cells[i].style.lineHeight = `50px`
+			cells[i].style.fontSize = `48px`
+		}
+	} else if (row <= 25 && row > 10) {
+		document.querySelector('.container').style.width = `${
+			row * cellSetting[0].width + row * cellSetting[0].margin * 2
+		}px`
+		outputField.style.width = `${
+			row * cellSetting[0].width + row * cellSetting[0].margin * 2
+		}px`
+		outputField.style.gridTemplateColumns = `repeat(${row}, 1fr)`
+		for (let i = 0; i < totalCells; i++) {
+			cells[i].style.margin = `${cellSetting[0].margin}px`
+			cells[i].style.height = `${cellSetting[0].height}px`
+			cells[i].style.width = `${cellSetting[0].width}px`
+			cells[i].style.lineHeight = `${cellSetting[0].lineHeight}px`
+			cells[i].style.fontSize = `${cellSetting[0].fontSize}px`
+		}
+	} else if (row <= 50 && row > 10) {
+		document.querySelector('.container').style.width = `${
+			row * cellSetting[1].width + row * cellSetting[1].margin * 2
+		}px`
+		outputField.style.width = `${
+			row * cellSetting[1].width + row * cellSetting[1].margin * 2
+		}px`
+		outputField.style.gridTemplateColumns = `repeat(${row}, 1fr)`
+		for (let i = 0; i < totalCells; i++) {
+			cells[i].style.margin = `${cellSetting[1].margin}px`
+			cells[i].style.height = `${cellSetting[1].height}px`
+			cells[i].style.width = `${cellSetting[1].width}px`
+			cells[i].style.lineHeight = `${cellSetting[1].lineHeight}px`
+			cells[i].style.fontSize = `${cellSetting[1].fontSize}px`
+		}
+	} else if (row <= 75 && row > 10) {
+		document.querySelector('.container').style.width = `${
+			row * cellSetting[2].width + row * cellSetting[2].margin * 2
+		}px`
+		outputField.style.width = `${
+			row * cellSetting[2].width + row * cellSetting[2].margin * 2
+		}px`
+		outputField.style.gridTemplateColumns = `repeat(${row}, 1fr)`
+		for (let i = 0; i < totalCells; i++) {
+			cells[i].style.margin = `${cellSetting[2].margin}px`
+			cells[i].style.height = `${cellSetting[2].height}px`
+			cells[i].style.width = `${cellSetting[2].width}px`
+			cells[i].style.lineHeight = `${cellSetting[2].lineHeight}px`
+			cells[i].style.fontSize = `${cellSetting[2].fontSize}px`
+		}
+	} else if (row <= 100 && row > 10) {
+		document.querySelector('.container').style.width = `${
+			row * cellSetting[3].width + row * cellSetting[3].margin * 2
+		}px`
+		outputField.style.width = `${
+			row * cellSetting[3].width + row * cellSetting[3].margin * 2
+		}px`
+		outputField.style.gridTemplateColumns = `repeat(${row}, 1fr)`
+		for (let i = 0; i < totalCells; i++) {
+			cells[i].style.margin = `${cellSetting[3].margin}px`
+			cells[i].style.height = `${cellSetting[3].height}px`
+			cells[i].style.width = `${cellSetting[3].width}px`
+			cells[i].style.lineHeight = `${cellSetting[3].lineHeight}px`
+			cells[i].style.fontSize = `${cellSetting[3].fontSize}px`
+		}
+	}
 
 	for (let i = 0; i < library.length; i++) {
 		if (theme === library[i].name) {
@@ -67,19 +181,9 @@ const createRect = (x, y, theme) => {
 		}
 	}
 
-	if (x > 10) {
-		x = 10
-		horizontal.value = 10
-	}
-
-	if (y > 10) {
-		y = 10
-		vertical.value = 10
-	}
-
 	for (let i = 0; i < x; i++) {
 		patternX[i] = theme.fill
-		for (let j = 0; j < 10; j++) {
+		for (let j = 0; j < row; j++) {
 			if (patternX.lastIndexOf(theme.fill) < j) {
 				patternX[j] = theme.empty
 			}
@@ -92,7 +196,7 @@ const createRect = (x, y, theme) => {
 		} else {
 			patternY[i] = theme.empty
 		}
-		for (let j = 0; j < 10; j++) {
+		for (let j = 0; j < col; j++) {
 			if (patternY.lastIndexOf(theme.fill) < j) {
 				patternY[j] = theme.empty
 			}
@@ -113,7 +217,7 @@ const createRect = (x, y, theme) => {
 		rectIdx += rect[i].join('')
 	}
 
-	for (let i = 0; i < rect.length * 10; i++) {
+	for (let i = 0; i < rect.length * row; i++) {
 		cells[i].innerHTML += rectIdx[i]
 		if (cells[i].outerText === theme.fill) {
 			cells[i].style.background = theme.colorFill
@@ -126,5 +230,11 @@ const createRect = (x, y, theme) => {
 }
 
 createRectBtn.addEventListener('click', function () {
-	createRect(horizontal.value, vertical.value, theme.value)
+	createRect(
+		Number(horizontal.value),
+		Number(vertical.value),
+		theme.value,
+		Number(rowCells.value),
+		Number(colCells.value)
+	)
 })
