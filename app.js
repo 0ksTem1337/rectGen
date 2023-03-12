@@ -32,12 +32,21 @@ const library = [
 		colorEmptyText: '#27ae60',
 	},
 	{
-		name: 'palette',
+		name: 'palette-green',
 		fill: 'X',
 		empty: '-',
 		colorFill: '#27ae60',
 		colorEmpty: '#ecf0f1',
 		colorFillText: '#27ae60',
+		colorEmptyText: '#ecf0f1',
+	},
+	{
+		name: 'palette-carrot',
+		fill: 'X',
+		empty: '-',
+		colorFill: '#e67e22',
+		colorEmpty: '#ecf0f1',
+		colorFillText: '#e67e22',
 		colorEmptyText: '#ecf0f1',
 	},
 ]
